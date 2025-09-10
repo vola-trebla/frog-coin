@@ -1,5 +1,8 @@
 # 🐸 FrogCoin
 
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/3a3a3c99-697f-429d-80e4-daaaa28b618c" />
+
+
 ERC20 smart contract with mint & burn functionality and full Foundry unit tests.  
 Built with Solidity ^0.8.0 and OpenZeppelin.
 
