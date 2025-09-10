@@ -1,78 +1,66 @@
-# 🐸 FrogCoin
+## Foundry
 
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/67887b37-295c-48d3-86da-5794c2a4d4ad" />
+**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
+Foundry consists of:
 
-ERC20 smart contract with mint & burn functionality and full Foundry unit tests.  
-Built with Solidity ^0.8.0 and OpenZeppelin.
+- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
+- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
+- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
+- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
----
+## Documentation
 
-## 📄 Smart Contract
+https://book.getfoundry.sh/
 
-File: `src/FrogCoin.sol`
+## Usage
 
-```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+### Build
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-
-contract FrogCoin is ERC20, Ownable {
-    constructor() ERC20("FrogCoin", "FROG") {}
-
-    function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
-    }
-
-    function burn(address from, uint256 amount) public onlyOwner {
-        _burn(from, amount);
-    }
-}
+```shell
+$ forge build
 ```
 
----
+### Test
 
-## ✅ Features
-- ERC20 standard based on OpenZeppelin
-- `mint`: only owner can mint tokens
-- `burn`: only owner can burn tokens from any address
-- Access control via `Ownable`
-
----
-
-## 🧪 Tests
-
-File: `test/FrogCoin.t.sol`
-
-- `test_InitialSupplyAndDetails` → verifies name, symbol, decimals, totalSupply
-- `test_Mint_Success` → owner can mint tokens
-- `test_Mint_RevertWhenNotOwner` → non-owner cannot mint
-- `test_Burn_Success` → burn tokens successfully
-- `test_Burn_RevertWhenNotOwner` → revert if non-owner tries to burn
-- `test_Burn_RevertInsufficientBalance` → revert if trying to burn too much
-- `test_Transfer_Success` → standard ERC20 transfer works
-
----
-
-## 🚀 How to Run
-
-Make sure you have Foundry installed.
-
-```bash
-# Initialize project
-forge init frog-coin
-
-# Install dependencies
-forge install OpenZeppelin/openzeppelin-contracts@v4.9.3
-
-# Run tests
-forge test
+```shell
+$ forge test
 ```
 
----
+### Format
 
-## 📜 License
+```shell
+$ forge fmt
+```
 
-MIT
+### Gas Snapshots
+
+```shell
+$ forge snapshot
+```
+
+### Anvil
+
+```shell
+$ anvil
+```
+
+### Deploy
+
+```shell
+$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+```
+
+### Cast
+
+```shell
+$ cast <subcommand>
+```
+
+### Help
+
+```shell
+$ forge --help
+$ anvil --help
+$ cast --help
+```
