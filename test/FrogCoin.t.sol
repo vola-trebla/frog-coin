@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
 import "../src/FrogCoin.sol";
+import "../lib/openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol";
 
 contract FrogCoinTest is Test {
     FrogCoin public frogCoin;
@@ -38,7 +39,7 @@ contract FrogCoinTest is Test {
 
     function test_Mint_RevertWhenNotOwner() public {
         vm.prank(user1);
-        vm.expectRevert("Ownable: caller is not the owner");
+        vm.expectRevert(abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, user1));
         frogCoin.mint(user1, 100 ether);
     }
 
@@ -57,7 +58,7 @@ contract FrogCoinTest is Test {
 
     function test_Burn_RevertWhenNotOwner() public {
         vm.prank(user1);
-        vm.expectRevert("Ownable: caller is not the owner");
+        vm.expectRevert(abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, user1));
         frogCoin.burn(user1, 100 ether);
     }
 
@@ -66,7 +67,7 @@ contract FrogCoinTest is Test {
         frogCoin.mint(user1, 100 ether);
 
         vm.prank(owner);
-        vm.expectRevert("ERC20: burn amount exceeds balance");
+        vm.expectRevert(abi.encodeWithSelector(IERC20Errors.ERC20InsufficientBalance.selector, user1, 100 ether, 200 ether));
         frogCoin.burn(user1, 200 ether);
     }
 
