@@ -67,7 +67,9 @@ contract FrogCoinTest is Test {
         frogCoin.mint(user1, 100 ether);
 
         vm.prank(owner);
-        vm.expectRevert(abi.encodeWithSelector(IERC20Errors.ERC20InsufficientBalance.selector, user1, 100 ether, 200 ether));
+        vm.expectRevert(
+            abi.encodeWithSelector(IERC20Errors.ERC20InsufficientBalance.selector, user1, 100 ether, 200 ether)
+        );
         frogCoin.burn(user1, 200 ether);
     }
 
